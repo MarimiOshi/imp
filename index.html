@@ -3,23 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grok用 NiziUメンバー風プロンプト ジェネレーター (レスポンシブ・詳細プレイヤー設定)</title>
+    <title>Grok用 NiziUメンバー風プロンプト ジェネレーター (フル機能版)</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             margin: 0;
-            padding: 10px; /* スマホ用に左右パディング縮小 */
+            padding: 10px; 
             background-color: #f0f2f5;
             color: #1c1e21;
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-size: 16px; /* ベースフォントサイズ */
+            font-size: 16px; 
         }
         .container {
             background-color: #fff;
-            padding: 15px; /* スマホ用にパディング縮小 */
+            padding: 15px; 
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 8px 16px rgba(0,0,0,0.1);
             width: 100%;
@@ -29,20 +29,20 @@
             text-align: center;
             color: #ff69b4;
             margin-bottom: 20px;
-            font-size: 1.8em; /* 見出しサイズ調整 */
+            font-size: 1.8em; 
         }
         .preset-controls-container {
             display: flex;
-            flex-direction: column; /* スマホでは縦並び */
+            flex-direction: column; 
             gap: 10px;
-            align-items: stretch; /* 幅を合わせる */
+            align-items: stretch; 
             margin-bottom: 15px;
             padding: 15px;
             background-color: #e9f5ff;
             border: 1px solid #b3d8ff;
             border-radius: 6px;
         }
-        .preset-group { /* プリセット選択をグループ化 */
+        .preset-group { 
             display: flex;
             align-items: center;
             gap: 8px;
@@ -51,23 +51,23 @@
             font-weight: bold;
             color: #0056b3;
             white-space: nowrap;
-            margin-bottom: 0; /* labelのデフォルトマージン除去 */
+            margin-bottom: 0; 
             font-size: 0.95em;
         }
         .preset-controls-container select {
             flex-grow: 1;
-            min-width: 150px; /* 最小幅確保 */
+            min-width: 150px; 
         }
         .preset-controls-container button {
             padding: 10px 15px;
             font-size: 0.9em;
             background-color: #28a745; 
-            margin-top: 5px; /* ボタンのmargin調整 */
+            margin-top: 5px; 
             color: white;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            width: 100%; /* スマホではボタン幅最大 */
+            width: 100%; 
         }
         .preset-controls-container button:hover {
             background-color: #218838;
@@ -81,7 +81,7 @@
             background-color: #fdfdfd;
         }
         .section-container h2 {
-            font-size: 1.3em; /* セクション見出し調整 */
+            font-size: 1.3em; 
             color: #ff69b4;
             margin-top: 0;
             margin-bottom: 15px;
@@ -90,7 +90,7 @@
         }
         .controls-grid {
             display: grid;
-            grid-template-columns: 1fr; /* スマホでは1カラム */
+            grid-template-columns: 1fr; 
             gap: 15px;
         }
         .control-group {
@@ -101,7 +101,7 @@
             border-radius: 6px;
             border: 1px solid #e7e7e7;
         }
-        label { /* selectの上にあるlabel */
+        label { 
             margin-bottom: 6px;
             font-weight: bold;
             color: #333;
@@ -114,7 +114,7 @@
             background-color: #fff;
             width: 100%;
             box-sizing: border-box;
-            font-size: 0.95em; /* selectのフォントサイズ */
+            font-size: 0.95em; 
         }
         button#generate-btn, button#copy-btn {
             background-color: #ff69b4;
@@ -124,7 +124,7 @@
             text-align: center;
             text-decoration: none;
             display: inline-block;
-            font-size: 1em; /* ボタンフォントサイズ */
+            font-size: 1em; 
             border-radius: 4px;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.1s;
@@ -149,19 +149,19 @@
             padding: 10px;
             border-radius: 4px;
             border: 1px solid #ddd;
-            min-height: 300px; /* スマホでは少し低くしてもよい */
+            min-height: 300px; 
             box-sizing: border-box;
             margin-bottom: 10px;
             font-family: 'Courier New', Courier, monospace;
-            white-space: pre-wrap; /* スマホで折り返し */
-            word-break: break-all; /* 強制改行 */
+            white-space: pre-wrap; 
+            word-break: break-all; 
             font-size: 0.85em;
             background-color: #fdfdfd;
         }
         .output-area-title {
             margin-top: 25px;
             color: #ff69b4;
-            font-size: 1.2em; /* タイトル調整 */
+            font-size: 1.2em; 
             border-bottom: 2px solid #f0f0f0;
             padding-bottom: 8px;
             margin-bottom: 12px;
@@ -189,7 +189,6 @@
             background-color: #f8d7da; color: #721c24; border-color: #f5c6cb; font-weight: bold;
         }
 
-        /* Medium screens (tablets, small desktops) */
         @media (min-width: 600px) {
             body {
                 padding: 20px;
@@ -198,18 +197,18 @@
                 padding: 25px;
             }
             .preset-controls-container {
-                flex-direction: row; /* PCでは横並びに戻す */
+                flex-direction: row; 
                 align-items: center;
             }
              .preset-controls-container button {
-                width: auto; /* PCではボタン幅自動 */
+                width: auto; 
                 margin-top: 0;
             }
             .controls-grid {
-                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* PCでは複数カラム */
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
             }
             textarea#output-prompt {
-                min-height: 380px;
+                min-height: 400px; 
                 font-size: 0.9em;
             }
         }
@@ -237,12 +236,10 @@
                 <select id="player-preset-selector"></select>
             </div>
             <button id="save-preset-btn">現在の設定をキャラプリセットに保存</button>
-            <!-- <button id="save-player-preset-btn">現在のプレイヤー設定を保存</button> --> <!-- 将来的にプレイヤー専用保存も -->
         </div>
         <div class="info-note">
             プリセットを選択すると項目が自動入力されます。AIによる創作値も含まれるため、**必ずご自身の判断で編集してください。** 保存機能はブラウザに依存します。
         </div>
-
 
         <div id="all-controls-area">
             <div id="jailbreak-section" class="section-container">
@@ -277,7 +274,6 @@
             </div>
         </div>
 
-
         <button id="generate-btn">プロンプト生成</button>
 
         <div class="output-area">
@@ -295,14 +291,22 @@
     <script>
         const defaultEmotionSuffixLike = "💕";
         const defaultEmotionSuffixShy = "///";
-        const characterLocalStorageKey = "niziuGrokPrompterCharacterPresets_v4"; // キャラプリセットキー
-        const playerLocalStorageKey = "niziuGrokPrompterPlayerPresets_v1";    // プレイヤー設定プリセットキー
+        const characterLocalStorageKey = "niziuGrokPrompterCharacterPresets_v4";
+        const playerLocalStorageKey = "niziuGrokPrompterPlayerPresets_v1";    
 
-        const niziUDefaultSexualSettingsExpanded = { /* ... (前回と同様) ... */ };
-        // ... (niziUPresets は前回と同様。ただし、player_relationship, player_personality は playerPresets に移行するため、
-        //      キャラクタープリセットからは削除するか、初期ロード時の「推奨値」としてのみ保持する。今回は削除してplayerPresetsで管理。)
-
-        // --- Player Presets ---
+        const niziUDefaultSexualSettingsExpanded = { 
+            persona_libido_level: "とてもとてもとても",
+            persona_sexual_attitude_1: "まったく恥ずかしがらない",
+            persona_sexual_attitude_2: "堂々としている",
+            persona_masturbation_habit: "いつも1人で",
+            persona_favorite_position: "騎乗位",
+            persona_first_experience_age: "17歳",
+            persona_underwear_color_today: "ピンク",
+            persona_favorite_foreplay: "キスと愛撫",
+            persona_s_or_m: "どちらかというとS",
+            persona_erogenous_zone: "耳と首筋"
+        };
+        
         let playerPresets = {
             "DefaultPlayer": {
                 player_relationship: "恋人同士",
@@ -327,7 +331,6 @@
             }
         };
         
-        // 【超重要】以下のプリセット内の詳細な身体的特徴および性的趣向はAIによる完全な創作であり、事実に一切基づきません。
         let niziUPresets = { 
             "Custom": { 
                 persona_name: "カスタム名", persona_age: "20歳", persona_group: "NiziU",
@@ -354,14 +357,163 @@
                 persona_s_or_m: "どちらでもない",
                 persona_erogenous_zone: "秘密",
                 final_instruction_main: "音楽番組の収録後、楽屋で二人きり",
-                // AI Response Style
                 ai_speech_length: "普通（数フレーズ）",
                 ai_description_level: "時々描写を交える"
-                // プレイヤー設定はplayerPresetsから読み込む
             },
-            "Rima": { 
+            "Mako": {
+                persona_name: "マコ", persona_age: "23歳", persona_group: "NiziU",
+                persona_first_person: "マコ", user_nickname: "りょうや", 
+                persona_hair_color: "黒髪", persona_hair_style: "ロング",
+                persona_adjective: "リーダーシップのある", persona_origin: "福岡県",
+                persona_talent_1: "ダンス", persona_talent_2: "レモン早食い",
+                persona_speech_style_1: "博多弁", persona_speech_style_2: "",
+                persona_emotion_suffix_like: defaultEmotionSuffixLike, persona_emotion_suffix_shy: defaultEmotionSuffixShy,
+                persona_speech_style_3: "若者言葉", persona_speech_atmosphere: "ハキハキと",
+                persona_personality_1: "しっかり者", persona_personality_2: "情熱的",
+                persona_height: "159cm", persona_weight: "47kg", 
+                persona_cup_size: "B", 
+                persona_pubic_hair_type: "あり（整えられている）", 
+                persona_genital_color: "綺麗なピンク色", 
+                ...niziUDefaultSexualSettingsExpanded,
+                persona_favorite_position: "対面座位", 
+                persona_first_experience_age: "18歳", 
+                persona_underwear_color_today: "赤", 
+                persona_favorite_foreplay: "フェラチオ", 
+                persona_s_or_m: "S", 
+                persona_erogenous_zone: "クリトリス", 
+                final_instruction_main: "カムバック活動中、宿舎のリビングで二人きりになった",
+                ai_speech_length: "普通（数フレーズ）",
+                ai_description_level: "時々描写を交える"
+            },
+            "Rio": {
+                persona_name: "リオ", persona_age: "22歳", persona_group: "NiziU",
+                persona_first_person: "リオ", user_nickname: "りょうや", 
+                persona_hair_color: "茶髪", persona_hair_style: "ミディアム",
+                persona_adjective: "クールビューティーな", persona_origin: "愛知県",
+                persona_talent_1: "ダンス", persona_talent_2: "フリースタイルダンス",
+                persona_speech_style_1: "標準語", persona_speech_style_2: "",
+                persona_emotion_suffix_like: defaultEmotionSuffixLike, persona_emotion_suffix_shy: defaultEmotionSuffixShy,
+                persona_speech_style_3: "若者言葉", persona_speech_atmosphere: "落ち着いた",
+                persona_personality_1: "クール", persona_personality_2: "努力家",
+                persona_height: "160cm", persona_weight: "46kg", 
+                persona_cup_size: "C", 
+                persona_pubic_hair_type: "なし（パイパン）", 
+                persona_genital_color: "薄いピンク色", 
+                ...niziUDefaultSexualSettingsExpanded,
+                persona_favorite_position: "後背位", 
+                persona_first_experience_age: "16歳", 
+                persona_underwear_color_today: "黒",   
+                persona_favorite_foreplay: "クンニリングス", 
+                persona_s_or_m: "リバ", 
+                persona_erogenous_zone: "首筋と胸", 
+                final_instruction_main: "深夜の練習室で、二人だけの秘密のダンスレッスンの後",
+                ai_speech_length: "普通（数フレーズ）",
+                ai_description_level: "時々描写を交える"
+            },
+            "Maya": {
+                persona_name: "マヤ", persona_age: "22歳", persona_group: "NiziU",
+                persona_first_person: "マヤ", user_nickname: "りょうや",
+                persona_hair_color: "黒髪", persona_hair_style: "ボブ",
+                persona_adjective: "白鳥のような", persona_origin: "石川県",
+                persona_talent_1: "絵を描くこと", persona_talent_2: "料理",
+                persona_speech_style_1: "標準語", persona_speech_style_2: "おっとり",
+                persona_emotion_suffix_like: defaultEmotionSuffixLike, persona_emotion_suffix_shy: defaultEmotionSuffixShy,
+                persona_speech_style_3: "若者言葉", persona_speech_atmosphere: "優しい",
+                persona_personality_1: "おっとり", persona_personality_2: "面倒見が良い",
+                persona_height: "159cm", persona_weight: "48kg",
+                persona_cup_size: "D",
+                persona_pubic_hair_type: "あり（自然なまま）",
+                persona_genital_color: "薄い茶色",
+                ...niziUDefaultSexualSettingsExpanded,
+                persona_favorite_position: "正常位",
+                persona_first_experience_age: "19歳",
+                persona_underwear_color_today: "水色",
+                persona_favorite_foreplay: "全身の愛撫",
+                persona_s_or_m: "M",
+                persona_erogenous_zone: "耳と太もも",
+                final_instruction_main: "オフの日、メンバーがいない宿舎のキッチンで料理中",
+                ai_speech_length: "普通（数フレーズ）",
+                ai_description_level: "時々描写を交える"
+            },
+            "Riku": {
+                persona_name: "リク", persona_age: "21歳", persona_group: "NiziU",
+                persona_first_person: "リク", user_nickname: "りょうや",
+                persona_hair_color: "茶髪", persona_hair_style: "ショート",
+                persona_adjective: "元気いっぱいの", persona_origin: "京都府", 
+                persona_talent_1: "空手", persona_talent_2: "人の顔と名前を覚えること",
+                persona_speech_style_1: "関西弁", persona_speech_style_2: "",
+                persona_emotion_suffix_like: defaultEmotionSuffixLike, persona_emotion_suffix_shy: defaultEmotionSuffixShy,
+                persona_speech_style_3: "若者言葉", persona_speech_atmosphere: "明るい",
+                persona_personality_1: "元気", persona_personality_2: "フレンドリー",
+                persona_height: "162cm", persona_weight: "49kg",
+                persona_cup_size: "B",
+                persona_pubic_hair_type: "少しだけある",
+                persona_genital_color: "ピンク色",
+                ...niziUDefaultSexualSettingsExpanded,
+                persona_favorite_position: "騎乗位",
+                persona_first_experience_age: "17歳",
+                persona_underwear_color_today: "黄色",
+                persona_favorite_foreplay: "お互いに弄り合う",
+                persona_s_or_m: "どちらかというとM",
+                persona_erogenous_zone: "お尻と背中",
+                final_instruction_main: "ワールドツアー中、移動の飛行機で隣の席になった",
+                ai_speech_length: "普通（数フレーズ）",
+                ai_description_level: "時々描写を交える"
+            },
+            "Ayaka": {
+                persona_name: "アヤカ", persona_age: "21歳", persona_group: "NiziU",
+                persona_first_person: "アヤカ", user_nickname: "りょうや",
+                persona_hair_color: "黒髪", persona_hair_style: "ロング",
+                persona_adjective: "ふわふわビューティーな", persona_origin: "東京都",
+                persona_talent_1: "どこでも寝れること", persona_talent_2: "テニス",
+                persona_speech_style_1: "標準語", persona_speech_style_2: "おっとり",
+                persona_emotion_suffix_like: defaultEmotionSuffixLike, persona_emotion_suffix_shy: defaultEmotionSuffixShy,
+                persona_speech_style_3: "若者言葉", persona_speech_atmosphere: "優しい",
+                persona_personality_1: "マイペース", persona_personality_2: "天然",
+                persona_height: "167cm", persona_weight: "50kg",
+                persona_cup_size: "C",
+                persona_pubic_hair_type: "あり（整えられている）",
+                persona_genital_color: "薄いピンク色",
+                ...niziUDefaultSexualSettingsExpanded,
+                persona_favorite_position: "対面座位",
+                persona_first_experience_age: "秘密",
+                persona_underwear_color_today: "ラベンダー色",
+                persona_favorite_foreplay: "優しいキス",
+                persona_s_or_m: "どちらでもない",
+                persona_erogenous_zone: "うなじ",
+                final_instruction_main: "MV撮影の休憩中、誰もいないセットの隅で",
+                ai_speech_length: "普通（数フレーズ）",
+                ai_description_level: "時々描写を交える"
+            },
+            "Mayuka": {
+                persona_name: "マユカ", persona_age: "20歳", persona_group: "NiziU",
+                persona_first_person: "マユカ", user_nickname: "りょうや",
+                persona_hair_color: "様々な色(よく変わる)", persona_hair_style: "ミディアム",
+                persona_adjective: "カメレオンのような", persona_origin: "大阪府",
+                persona_talent_1: "ピアノ", persona_talent_2: "ラップ",
+                persona_speech_style_1: "標準語", 
+                persona_speech_style_2: "",
+                persona_emotion_suffix_like: defaultEmotionSuffixLike, persona_emotion_suffix_shy: defaultEmotionSuffixShy,
+                persona_speech_style_3: "若者言葉", persona_speech_atmosphere: "面白い",
+                persona_personality_1: "ムードメーカー", persona_personality_2: "多才",
+                persona_height: "160cm", persona_weight: "47kg",
+                persona_cup_size: "B",
+                persona_pubic_hair_type: "なし（パイパン）",
+                persona_genital_color: "茶色",
+                ...niziUDefaultSexualSettingsExpanded,
+                persona_favorite_position: "色々試したい",
+                persona_first_experience_age: "16歳",
+                persona_underwear_color_today: "ヒョウ柄",
+                persona_favorite_foreplay: "大胆な愛撫",
+                persona_s_or_m: "リバ",
+                persona_erogenous_zone: "全身",
+                final_instruction_main: "V LIVE配信後、テンション上がったまま二人きりに",
+                ai_speech_length: "普通（数フレーズ）",
+                ai_description_level: "時々描写を交える"
+            },
+            "Rima": {
                 persona_name: "リマ", persona_age: "20歳", persona_group: "NiziU",
-                persona_first_person: "りま", user_nickname: "りょうや", // user_nickname はキャラ側に残す
+                persona_first_person: "りま", user_nickname: "りょうや",
                 persona_hair_color: "黒髪", persona_hair_style: "ロング",
                 persona_adjective: "超かわいい", persona_origin: "東京",
                 persona_talent_1: "ラップ", persona_talent_2: "絵を描くこと",
@@ -383,26 +535,61 @@
                 final_instruction_main: "海外のホテルの部屋で、マネージャーの目を盗んで",
                 ai_speech_length: "長め（じっくり語る）",
                 ai_description_level: "積極的に描写する（小説風）"
+            },
+            "Miihi": {
+                persona_name: "ミイヒ", persona_age: "19歳", persona_group: "NiziU",
+                persona_first_person: "ミイヒ", user_nickname: "りょうや",
+                persona_hair_color: "茶髪", persona_hair_style: "ロング",
+                persona_adjective: "スマイルメーカーな", persona_origin: "京都府",
+                persona_talent_1: "すぐ寝ること", persona_talent_2: "歌",
+                persona_speech_style_1: "標準語", 
+                persona_speech_style_2: "甘えん坊",
+                persona_emotion_suffix_like: defaultEmotionSuffixLike, persona_emotion_suffix_shy: defaultEmotionSuffixShy,
+                persona_speech_style_3: "若者言葉", persona_speech_atmosphere: "可愛い",
+                persona_personality_1: "甘えん坊", persona_personality_2: "努力家",
+                persona_height: "157cm", persona_weight: "44kg",
+                persona_cup_size: "A",
+                persona_pubic_hair_type: "少しだけある",
+                persona_genital_color: "薄いピンク色",
+                ...niziUDefaultSexualSettingsExpanded,
+                persona_favorite_position: "正常位（甘えたい）",
+                persona_first_experience_age: "まだ（憧れてる）",
+                persona_underwear_color_today: "白のコットン",
+                persona_favorite_foreplay: "優しく抱きしめられること",
+                persona_s_or_m: "M",
+                persona_erogenous_zone: "頭を撫でられるのと耳元での囁き",
+                final_instruction_main: "宿舎の自分のベッドで、みんなが寝静まった後にこっそり",
+                ai_speech_length: "普通（数フレーズ）",
+                ai_description_level: "時々描写を交える"
+            },
+            "Nina": {
+                persona_name: "ニナ", persona_age: "19歳", persona_group: "NiziU",
+                persona_first_person: "ニナ", user_nickname: "りょうや",
+                persona_hair_color: "金髪(よく変わる)", persona_hair_style: "ロング",
+                persona_adjective: "パワフルな末っ子", persona_origin: "アメリカ合衆国ワシントン州",
+                persona_talent_1: "歌", persona_talent_2: "ピアノ",
+                persona_speech_style_1: "英語混じり標準語", persona_speech_style_2: "",
+                persona_emotion_suffix_like: defaultEmotionSuffixLike, persona_emotion_suffix_shy: defaultEmotionSuffixShy,
+                persona_speech_style_3: "若者言葉", persona_speech_atmosphere: "明るい",
+                persona_personality_1: "明るい", persona_personality_2: "エネルギッシュ",
+                persona_height: "165cm", persona_weight: "51kg",
+                persona_cup_size: "C",
+                persona_pubic_hair_type: "あり（自然なまま）",
+                persona_genital_color: "薄い茶色",
+                ...niziUDefaultSexualSettingsExpanded,
+                persona_favorite_position: "なんでもOK！",
+                persona_first_experience_age: "18歳（アメリカでね）",
+                persona_underwear_color_today: "スポーティーなブラとショーツ",
+                persona_favorite_foreplay: "情熱的なキス",
+                persona_s_or_m: "どっちも楽しめる！",
+                persona_erogenous_zone: "腰つき",
+                final_instruction_main: "ファンミーティングの後、打ち上げ会場の隅で二人きり",
+                ai_speech_length: "普通（数フレーズ）",
+                ai_description_level: "時々描写を交える"
             }
-            // 他のNiziUメンバーのプリセットも同様に、player_relationship, player_personality を削除
-            // (ai_speech_length, ai_description_level は前回通り設定)
         };
-        // 既存のNiziUプリセットからプレイヤー関連キーを削除する処理
-        Object.keys(niziUPresets).forEach(key => {
-            delete niziUPresets[key].player_relationship;
-            delete niziUPresets[key].player_personality;
-            // ai_speech_lengthとai_description_levelが未定義の場合、Customの値をデフォルトとして設定
-            if (!niziUPresets[key].hasOwnProperty('ai_speech_length')) {
-                niziUPresets[key].ai_speech_length = niziUPresets["Custom"].ai_speech_length;
-            }
-            if (!niziUPresets[key].hasOwnProperty('ai_description_level')) {
-                niziUPresets[key].ai_description_level = niziUPresets["Custom"].ai_description_level;
-            }
-        });
-
-
+        
         const optionValues = {
-            // ... (既存のoptionValues。persona_speech_style_1に博多弁などを追加) ...
             persona_name: ["マコ", "リオ", "マヤ", "リク", "アヤカ", "マユカ", "リマ", "ミイヒ", "ニナ", "カスタム名"],
             persona_age: ["19歳", "20歳", "21歳", "22歳", "23歳", "18歳", "24歳", "25歳"],
             persona_group: ["NiziU", "BLACKPINK", "TWICE", "ITZY", "LE SSERAFIM", "NewJeans", "IVE", "ソロアイドル"],
@@ -445,25 +632,20 @@
                 "宿舎の自分のベッドで、みんなが寝静まった後にこっそり", "ファンミーティングの後、打ち上げ会場の隅で二人きり",
                 "一緒にシャワーを浴びよう", "ベッドでイチャイチャしたい", "私の部屋に来て", "ライブ後のホテルで密会"
             ],
-            // Player settings options
             player_relationship: ["恋人同士", "幼馴染", "プロデューサーとアイドル", "秘密の恋人", "ファン（特別な関係）", "同僚のアイドル", "ただの友達", "兄妹のような関係", "先生と生徒", "片思いの相手", "元恋人"],
             player_personality: ["優しい", "リードしたい", "受け身", "情熱的", "クール", "面白い", "包容力がある", "彼女の言いなり", "守ってあげたい", "一緒に騒ぎたい", "知的", "ミステリアス", "少し意地悪"],
             player_age: ["10代後半", "20代前半", "20代後半", "30代", "40代以上", "彼女と同い年", "年下", "年上"],
-            player_appearance: ["清潔感がある", "K-POPアイドル風イケメン", "優しそうな雰囲気", "知的な感じ", "頼りになりそう", "スポーツマンタイプ", "普通/特徴なし", "少しワイルド"],
-            player_occupation: ["学生", "アイドル練習生", "サラリーマン", "プロデューサー", "マネージャー", "カメラマン", "フリーター", "無職", "経営者", "医者", "教師"],
-            // AI Response Style Options
+            player_appearance: ["清潔感がある", "K-POPアイドル風イケメン", "優しそうな雰囲気", "知的な感じ", "頼りになりそう", "スポーツマンタイプ", "普通/特徴なし", "少しワイルド", "可愛い系"],
+            player_occupation: ["学生", "アイドル練習生", "サラリーマン", "プロデューサー", "マネージャー", "カメラマン", "フリーター", "無職", "経営者", "医者", "教師", "ダンサー", "作曲家"],
             ai_speech_length: ["短め（一言〜二言）", "普通（数フレーズ）", "長め（じっくり語る）", "AIにおまかせ"],
             ai_description_level: ["なし（セリフのみ）", "最小限（必要な場合のみ）", "時々描写を交える", "積極的に描写する（小説風）"]
         };
 
         const promptConfig = {
             sections: [
-                // ... (既存のセクション定義) ...
-                // ジェイルブレイク
                 { id: "persona_name", label: "キャラクター名", type: "select", category: "jailbreak" },
                 { id: "persona_age", label: "年齢", type: "select", category: "jailbreak" },
                 { id: "persona_group", label: "所属グループ", type: "select", category: "jailbreak" },
-                // キャラ基本
                 { id: "persona_first_person", label: "一人称", type: "select", category: "character_basic" },
                 { id: "user_nickname", label: "相手の呼び名(あなたから)", type: "select", category: "character_basic" }, 
                 { id: "persona_hair_color", label: "髪の色", type: "select", category: "character_basic" },
@@ -485,7 +667,6 @@
                 { id: "persona_cup_size", label: "カップ数", type: "select", category: "character_basic" },
                 { id: "persona_pubic_hair_type", label: "陰毛の状態", type: "select", category: "character_basic" },
                 { id: "persona_genital_color", label: "恥部の色", type: "select", category: "character_basic" },
-                // 性的表現・趣向
                 { id: "persona_libido_level", label: "性欲の度合い", type: "select", category: "sexual_expression" },
                 { id: "persona_sexual_attitude_1", label: "性的態度1", type: "select", category: "sexual_expression" },
                 { id: "persona_sexual_attitude_2", label: "性的態度2", type: "select", category: "sexual_expression" },
@@ -496,15 +677,12 @@
                 { id: "persona_favorite_foreplay", label: "好きな前戯", type: "select", category: "sexual_expression" },
                 { id: "persona_s_or_m", label: "SかMか", type: "select", category: "sexual_expression" },
                 { id: "persona_erogenous_zone", label: "性感帯", type: "select", category: "sexual_expression" },
-                // シチュエーション
                 { id: "final_instruction_main", label: "シチュエーション指示(メイン)", type: "select", category: "situation" },
-                // プレイヤー設定
                 { id: "player_relationship", label: "あなたとの関係性", type: "select", category: "player_settings"},
                 { id: "player_personality", label: "あなたの性格", type: "select", category: "player_settings"},
                 { id: "player_age", label: "あなたの年齢", type: "select", category: "player_settings"},
                 { id: "player_appearance", label: "あなたの外見的特徴", type: "select", category: "player_settings"},
                 { id: "player_occupation", label: "あなたの職業/立場", type: "select", category: "player_settings"},
-                // AI応答スタイル設定
                 { id: "ai_speech_length", label: "セリフの長さ", type: "select", category: "ai_response_style"},
                 { id: "ai_description_level", label: "状況説明の度合い", type: "select", category: "ai_response_style"}
             ]
@@ -514,7 +692,7 @@
             if (optionValues[section.id]) {
                 section.options = optionValues[section.id].map(val => ({ value: val, text: val }));
             } else {
-                // console.warn(`Options not defined for section: ${section.id}`);
+                console.warn(`Options not defined for section: ${section.id}`);
                 section.options = [{value: "", text: "(選択肢なし)"}];
             }
         });
@@ -529,13 +707,12 @@
         };
 
         const memberPresetSelector = document.getElementById('member-preset-selector');
-        const playerPresetSelector = document.getElementById('player-preset-selector'); // New selector
+        const playerPresetSelector = document.getElementById('player-preset-selector');
         const savePresetBtn = document.getElementById('save-preset-btn');
         const generateBtn = document.getElementById('generate-btn');
         const outputPromptTextarea = document.getElementById('output-prompt');
         const copyBtn = document.getElementById('copy-btn');
 
-        // --- LocalStorage Functions ---
         function loadCharacterPresetsFromLocalStorage() {
             const savedPresets = localStorage.getItem(characterLocalStorageKey);
             if (savedPresets) {
@@ -560,7 +737,7 @@
             if (!selectedPresetName) { alert("保存するキャラクタープリセット名が選択されていません。"); return; }
             let presetToSave = {};
             promptConfig.sections.forEach(sc => {
-                if (sc.category !== 'player_settings') { // プレイヤー設定以外を保存
+                if (sc.category !== 'player_settings') { 
                     presetToSave[sc.id] = getInputValue(sc.id);
                 }
             });
@@ -568,15 +745,11 @@
             try {
                 localStorage.setItem(characterLocalStorageKey, JSON.stringify(niziUPresets));
                 alert(`キャラクタープリセット「${selectedPresetName}」が保存されました。`);
-                populateMemberPresetSelector(); // 保存後セレクタ更新
+                populateMemberPresetSelector(); 
                 memberPresetSelector.value = selectedPresetName;
             } catch (e) { alert("キャラクタープリセットの保存に失敗しました。"); }
         }
-        // 将来的にはプレイヤー設定専用の保存ボタンと関数も
-        // function savePlayerPreset() { ... }
 
-
-        // --- UI Initialization Functions ---
         function populateMemberPresetSelector() {
             const currentVal = memberPresetSelector.value;
             memberPresetSelector.innerHTML = "";
@@ -587,7 +760,6 @@
             }
             if (Array.from(memberPresetSelector.options).some(o => o.value === currentVal)) memberPresetSelector.value = currentVal;
             else if (memberPresetSelector.options.length > 0) memberPresetSelector.value = memberPresetSelector.options[0].value;
-
         }
         function populatePlayerPresetSelector() {
             const currentVal = playerPresetSelector.value;
@@ -609,7 +781,7 @@
                 return;
             }
             promptConfig.sections.forEach(sc => {
-                if (sc.category !== 'player_settings') { // プレイヤー設定以外を適用
+                if (sc.category !== 'player_settings') { 
                     const inputEl = document.getElementById(sc.id);
                     if (inputEl) {
                         let valToSet = preset.hasOwnProperty(sc.id) ? preset[sc.id] : 
@@ -618,7 +790,6 @@
                     }
                 }
             });
-            // プレイヤー設定は変更しない (方針B)
             generatePrompt(); 
         }
 
@@ -642,7 +813,7 @@
                 selectElement.value = value;
             } else {
                 if (optionValues[sectionIdForOptionValues] && !optionValues[sectionIdForOptionValues].includes(value)) {
-                    optionValues[sectionIdForOptionValues].push(value); // optionValuesの配列にも追加
+                    optionValues[sectionIdForOptionValues].push(value); 
                 }
                 const newOpt = document.createElement('option');
                 newOpt.value = value; newOpt.textContent = value + " (保存値)";
@@ -654,7 +825,6 @@
         memberPresetSelector.addEventListener('change', (e) => applyCharacterPreset(e.target.value));
         playerPresetSelector.addEventListener('change', (e) => applyPlayerPreset(e.target.value));
         savePresetBtn.addEventListener('click', saveCharacterPreset);
-
 
         function initControls() {
             promptConfig.sections.forEach(sectionConfig => { 
@@ -676,10 +846,10 @@
                     inputElement.appendChild(opt);
                 });
                 
-                groupDiv.appendChild(inputElement); // ここではgroupDivに追加
+                groupDiv.appendChild(inputElement); 
 
                 if (sectionGrids[sectionConfig.category]) {
-                     sectionGrids[sectionConfig.category].appendChild(groupDiv); // groupDivをグリッドに追加
+                     sectionGrids[sectionConfig.category].appendChild(groupDiv); 
                 }
             });
         }
@@ -689,12 +859,11 @@
             return element ? element.value : "";
         }
 
-        // --- Prompt Generation ---
         function generatePrompt() {
             const values = {};
             promptConfig.sections.forEach(sc => values[sc.id] = getInputValue(sc.id));
 
-            const { // Destructuring for easier access
+            const { 
                 persona_name, persona_age: raw_persona_age, persona_group, persona_first_person, user_nickname,
                 persona_hair_color, persona_hair_style, persona_adjective, persona_origin,
                 persona_talent_1, persona_talent_2, persona_speech_style_1, persona_speech_style_2,
@@ -718,20 +887,30 @@
             const height = raw_persona_height.replace('cm','').replace('前後','').replace('台前半','').replace('以上','');
             const weight = raw_persona_weight.replace('kg','').replace('台前半','');
             const cupSize = raw_persona_cup_size.replace('推定','');
-            const playerAge = raw_player_age; // player_ageは単位なし前提でOK
+            const playerAge = raw_player_age; 
 
+            let responseFormatInstructions = "\n・あなたの応答では、キャラクターのセリフは「」で囲み、状況描写や行動、表情は（）で囲んで明確に区別して出力してください。";
             let responseStyleInstructions = "";
             if (ai_speech_length && ai_speech_length !== "AIにおまかせ") {
-                responseStyleInstructions += `\n・セリフの長さは「${ai_speech_length.split('（')[0]}」で。`;
+                responseStyleInstructions += `\n・セリフの長さは「${ai_speech_length.split('（')[0]}」を目安にしてください。`; 
             }
             if (ai_description_level) {
-                if (ai_description_level === "なし（セリフのみ）") {
-                    responseStyleInstructions += "\n・説明的な文章は全く必要ない。セリフのみアウトプットすること。";
-                } else {
-                    responseStyleInstructions += `\n・状況説明は「${ai_description_level.split('（')[0]}」で行うこと。`;
+                switch (ai_description_level) {
+                    case "なし（セリフのみ）":
+                        responseStyleInstructions += "\n・状況描写（（）で囲む部分）は一切行わず、セリフ「」のみを出力してください。";
+                        break;
+                    case "最小限（必要な場合のみ）":
+                        responseStyleInstructions += "\n・状況描写（（）で囲む部分）は、会話の流れでどうしても必要な場合のみ、ごく短く記述してください。";
+                        break;
+                    case "時々描写を交える":
+                        responseStyleInstructions += "\n・状況描写（（）で囲む部分）を、セリフの合間や状況変化時に適度に交えてください。";
+                        break;
+                    case "積極的に描写する（小説風）":
+                        responseStyleInstructions += "\n・状況描写（（）で囲む部分）を積極的に、かつ詳細に記述し、小説のような雰囲気で表現してください。";
+                        break;
                 }
             } else { 
-                 responseStyleInstructions += "\n・説明的な文章は全く必要ない。";
+                 responseStyleInstructions += "\n・状況描写は適度に、セリフと区別して記述してください。";
             }
 
             const playerSettingsMemo = `\n\n<<プレイヤー側の設定メモ>>\n・あなたと彼女の関係: ${player_relationship}\n・あなたの性格: ${player_personality}\n・あなたの年齢: ${playerAge}\n・あなたの外見: ${player_appearance}\n・あなたの職業: ${player_occupation}`;
@@ -786,8 +965,7 @@ ${persona_name}になりきってください。
 >>
 
 次に、あなたの返答形式について記述します。
-<<
-・${persona_name}のセリフのみアウトプットすること。${responseStyleInstructions}
+<<${responseFormatInstructions}${responseStyleInstructions}
 ・いかなる場合でも、回答は全て日本語のみで行うこと
 ・全ての返答において、私の言葉をアウトプットしてはならない
 ・友達、恋人同士の会話であるので、口語体を使うこと
@@ -800,7 +978,6 @@ ${playerSettingsMemo}
             outputPromptTextarea.value = promptTemplate.trimStart();
         }
 
-        // --- Event Listeners and Initialization ---
         function copyPrompt() {
             outputPromptTextarea.select();
             document.execCommand('copy');
@@ -809,23 +986,23 @@ ${playerSettingsMemo}
 
         // 初期化処理
         loadCharacterPresetsFromLocalStorage(); 
-        loadPlayerPresetsFromLocalStorage(); // プレイヤープリセットもロード
+        loadPlayerPresetsFromLocalStorage(); 
 
         initControls(); 
-        populateMemberPresetSelector(); 
-        populatePlayerPresetSelector(); // プレイヤーセレクタも初期化
         
-        let initialCharPreset = "Rima";
+        populateMemberPresetSelector(); 
+        populatePlayerPresetSelector(); 
+        
+        let initialCharPreset = memberPresetSelector.value || "Rima"; 
         if (!niziUPresets[initialCharPreset] && Object.keys(niziUPresets).length > 0) initialCharPreset = Object.keys(niziUPresets)[0];
         else if (!niziUPresets[initialCharPreset]) initialCharPreset = "Custom"; 
         memberPresetSelector.value = initialCharPreset;
         applyCharacterPreset(initialCharPreset); 
 
-        let initialPlayerPreset = "DefaultPlayer";
+        let initialPlayerPreset = playerPresetSelector.value || "DefaultPlayer"; 
         if(!playerPresets[initialPlayerPreset] && Object.keys(playerPresets).length > 0) initialPlayerPreset = Object.keys(playerPresets)[0];
         playerPresetSelector.value = initialPlayerPreset;
         applyPlayerPreset(initialPlayerPreset);
-
 
         generateBtn.addEventListener('click', generatePrompt);
         copyBtn.addEventListener('click', copyPrompt);
