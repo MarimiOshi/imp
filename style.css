@@ -1,0 +1,75 @@
+body {
+    font-family: sans-serif;
+    margin: 20px;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+h1, h2 {
+    color: #e91e63;
+}
+
+.section {
+    background-color: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: inline-block;
+    width: 180px; /* ラベルの幅を調整 */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="text"],
+select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 300px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: monospace;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #e91e63;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #c2185b;
+}
+
+#preset-section label,
+#preset-section input[type="text"],
+#preset-section select,
+#preset-section button {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+#preset-section br {
+    display: block;
+    margin-bottom: 10px;
+}
